@@ -16,6 +16,20 @@ server.get("/api/resources", async (req, res, next) => {
     next(err);
   }
 });
+
+server.post("/api/resources", async (req, res, next) => {
+  try {
+    const [id] = await db("resources").insert(req.body);
+
+    const resource = await db("resources")
+      .where({ id })
+      .first();
+
+    res.status(201).json(resource);
+  } catch (err) {
+    next(err);
+  }
+});
 //
 
 server.use((err, req, res, next) => {
