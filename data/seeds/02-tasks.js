@@ -1,13 +1,26 @@
-
-exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('table_name').del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
-      ]);
-    });
+exports.seed = async knex => {
+  await knex("tasks").insert([
+    {
+      project_id: 1,
+      description:
+        "I need to create a data model for my API and structure my backend.",
+      notes: "Need to make sure I update my node version!"
+    },
+    {
+      project_id: 1,
+      description:
+        "Next I need to set up redux and get data storage set up properly on my app."
+    },
+    {
+      project_id: 2,
+      description: "I have to set up my Firebase storage and authentication.",
+      notes:
+        "It will also help to solidify my knowledge of Firebase a bit more!"
+    },
+    {
+      project_id: 2,
+      description:
+        "I need to set up my React application initially and test that I can display my data from the Firebase server"
+    }
+  ]);
 };
