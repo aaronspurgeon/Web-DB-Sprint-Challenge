@@ -19,6 +19,16 @@ exports.up = async knex => {
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
   });
+
+  await knex.schema.createTable("resources", table => {
+    table.increments("id");
+    table.string("name").notNullable();
+    table.string("description");
+  });
 };
 
-exports.down = async knex => {};
+exports.down = async knex => {
+  await knex.schema.dropTableIfExists("resources");
+  await knex.schema.dropTableIfExists("tasks");
+  await knex.schema.dropTableIfExists("projects");
+};
