@@ -2,14 +2,14 @@ exports.seed = async knex => {
   await knex("projects").insert([
     {
       name: "Twitter clone",
-      description: "A social media clone made with the MERN stack.",
-      completed: false
+      description: "A social media clone made with the MERN stack."
+      // completed: false
     },
     {
       name: "DevHired",
       description:
-        "An app built using React and Firebase/Node to aid developers in their job search.",
-      completed: false
+        "An app built using React and Firebase/Node to aid developers in their job search."
+      // completed: false
     }
   ]);
 };
