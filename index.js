@@ -52,6 +52,23 @@ server.post("/api/projects", async (req, res, next) => {
     next(err);
   }
 });
+
+server.get("/api/tasks", async (req, res, next) => {
+  try {
+    const tasks = await db("tasks as t")
+      .leftJoin("projects as p", "p.id", "t.project_id")
+      .select(
+        "t.id",
+        "t.description as tasks_description",
+        "p.name as project_name",
+        "p.description as project_description"
+      );
+
+    res.json(tasks);
+  } catch (err) {
+    next(err);
+  }
+});
 //
 
 server.use((err, req, res, next) => {
