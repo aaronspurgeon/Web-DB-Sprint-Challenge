@@ -11,7 +11,7 @@ server.use(express.json());
 // routes
 server.get("/api/resources", async (req, res, next) => {
   try {
-    res.json(await db("resources"));
+    res.status(201).json(await db("resources"));
   } catch (err) {
     next(err);
   }
@@ -65,6 +65,20 @@ server.get("/api/tasks", async (req, res, next) => {
       );
 
     res.json(tasks);
+  } catch (err) {
+    next(err);
+  }
+});
+
+server.post("/api/tasks", async (req, res, next) => {
+  try {
+    const [id] = await db("tasks").insert(req.body);
+
+    const task = await db("tasks")
+      .where({ id })
+      .first();
+
+    res.status(201).json(task);
   } catch (err) {
     next(err);
   }
