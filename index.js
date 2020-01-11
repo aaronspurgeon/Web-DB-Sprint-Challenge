@@ -60,6 +60,7 @@ server.get("/api/tasks", async (req, res, next) => {
       .select(
         "t.id",
         "t.description as tasks_description",
+        "t.completed as task_completed",
         "p.name as project_name",
         "p.description as project_description"
       );
