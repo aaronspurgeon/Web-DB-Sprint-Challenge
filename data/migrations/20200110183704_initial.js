@@ -3,14 +3,20 @@ exports.up = async knex => {
     table.increments("id");
     table.string("name").notNullable();
     table.string("description");
-    table.boolean("completed").notNullable();
+    table
+      .boolean("completed")
+      .defaultTo(false)
+      .notNullable();
   });
 
   await knex.schema.createTable("tasks", table => {
     table.increments("id");
     table.string("description").notNullable();
     table.string("notes");
-    table.boolean("completed").notNullable();
+    table
+      .boolean("completed")
+      .defaultTo(false)
+      .notNullable();
     table
       .integer("project_id")
       .notNullable()

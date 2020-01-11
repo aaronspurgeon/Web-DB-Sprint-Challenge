@@ -30,6 +30,28 @@ server.post("/api/resources", async (req, res, next) => {
     next(err);
   }
 });
+
+server.get("/api/projects", async (req, res, next) => {
+  try {
+    res.status(200).json(await db("projects"));
+  } catch (err) {
+    next(err);
+  }
+});
+
+server.post("/api/projects", async (req, res, next) => {
+  try {
+    const [id] = await db("projects").insert(req.body);
+
+    const project = await db("projects")
+      .where({ id })
+      .first();
+
+    res.status(201).json(project);
+  } catch (err) {
+    next(err);
+  }
+});
 //
 
 server.use((err, req, res, next) => {
